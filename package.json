@@ -1,0 +1,14 @@
+{
+	"name": "srl-game-report",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"dev": "nodemon index.js",
+		"build": "npm run build:wasm",
+		"build:wasm": "wasm-pack build -t nodejs crate"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC"
+}
