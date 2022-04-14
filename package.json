@@ -7,7 +7,7 @@
 		"dev": "nodemon index.js",
 		"build": "npm run build:wasm",
 		"build:wasm": "wasm-pack build -t nodejs crate",
-		"start": "build && node index.js"
+		"start": "node index.js"
 	},
 	"keywords": [],
 	"author": "",
