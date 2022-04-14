@@ -16,8 +16,8 @@ async function parseReplay(file) {
 	// const buffer = await fs.readFileSync(file.buffer);
 	const data = new Uint8Array(file.buffer);
 	const out = await parser.parse(data);
-	console.log(out.replay.properties);
-	console.log('parsed!');
+	// console.log(out.replay.properties);
+	// console.log('parsed!');
 	return out;
 }
 
