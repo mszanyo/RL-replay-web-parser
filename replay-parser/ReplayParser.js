@@ -10,7 +10,7 @@ class ReplayParser {
 		this.replay = parse(data);
 
 		return {
-			replay: JSON.parse(this.replay.header_json(true)),
+			replay: JSON.parse(this.replay.header_json(false)),
 			// networkErr: this.replay.network_err() ?? null,
 		};
 	}
