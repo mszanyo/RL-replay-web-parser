@@ -7,7 +7,7 @@ const upload = multer({ storage });
 const PORT = process.env.PORT || 3000;
 const app = express();
 
-//test
+//test igen
 app.post('/parse-replay', upload.single('file'), async function (req, res, next) {
 	const file = req.file;
 	console.log('The Files', file);
