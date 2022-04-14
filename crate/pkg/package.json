@@ -1,0 +1,11 @@
+{
+  "name": "replay_parser_engine",
+  "version": "0.1.0",
+  "files": [
+    "replay_parser_engine_bg.wasm",
+    "replay_parser_engine.js",
+    "replay_parser_engine.d.ts"
+  ],
+  "main": "replay_parser_engine.js",
+  "types": "replay_parser_engine.d.ts"
+}
