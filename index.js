@@ -21,6 +21,7 @@ app.use(express.json({ extended: false }));
 //test igen
 app.post('/parse-replay', upload.single('file'), async function (req, res, next) {
 	console.log(req);
+	console.log(req.file);
 	const file = req.file;
 	// console.log('The file submited', file);
 	// console.log('The Files', file);
