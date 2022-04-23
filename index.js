@@ -25,8 +25,8 @@ app.post('/parse-replay', upload.single('file'), async function (req, res, next)
 	// console.log('The file submited', file);
 	// console.log('The Files', file);
 	const parsedReplay = await parseReplay(file);
-	console.log('The parsed replay', parsedReplay);
-	// res.json({ parsedReplay });
+	// console.log('The parsed replay', parsedReplay);
+	res.send(parsedReplay);
 	// res.send('Hello!');
 	next();
 });
