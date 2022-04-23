@@ -9,6 +9,11 @@ const upload = multer({ storage });
 const PORT = process.env.PORT || 3000;
 const app = express();
 
+app.use((req, res, next) => {
+	res.header('Access-Control-Allow-Origin', '*');
+	next();
+});
+
 //test igen
 app.post('/parse-replay', upload.single('file'), async function (req, res, next) {
 	const file = req.file;
