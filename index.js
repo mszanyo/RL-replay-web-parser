@@ -9,7 +9,15 @@ const upload = multer({ storage });
 const PORT = process.env.PORT || 3000;
 const app = express();
 
-//test igen
+app.use((req, res, next) => {
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
+	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+	next();
+});
+
+app.use(express.json({ extended: false }));
+
 app.post('/parse-replay', upload.single('file'), async function (req, res, next) {
 	if (!req.file) return res.status(400).json('No file uploaded');
 	if (req.file.mimetype !== 'application/octet-stream' || !req.file.buffer)
