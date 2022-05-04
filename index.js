@@ -9,27 +9,20 @@ const upload = multer({ storage });
 const PORT = process.env.PORT || 3000;
 const app = express();
 
-app.use((req, res, next) => {
-	res.header('Access-Control-Allow-Origin', '*');
-	res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
-	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-	next();
-});
-
-app.use(express.json({ extended: false }));
-
 //test igen
 app.post('/parse-replay', upload.single('file'), async function (req, res, next) {
-	console.log(req);
-	console.log('Req.file: ', req.file);
-	const file = req.file;
-	// console.log('The file submited', file);
-	// console.log('The Files', file);
-	const parsedReplay = await parseReplay(file);
-	// console.log('The parsed replay', parsedReplay);
-	res.send(parsedReplay);
-	// res.send('Hello!');
-	next();
+	if (!req.file) return res.status(400).json('No file uploaded');
+	if (req.file.mimetype !== 'application/octet-stream' || !req.file.buffer)
+		return res.status(415).json('File is not a replay');
+	try {
+		const file = req.file;
+		const parsedReplay = await parseReplay(file);
+		res.send(parsedReplay);
+		next();
+	} catch (err) {
+		res.status(500).json('Replay parsing failed');
+		next();
+	}
 });
 
 app.listen(PORT, () => {
