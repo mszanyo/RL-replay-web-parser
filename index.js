@@ -23,8 +23,10 @@ app.use((req, res, next) => {
 app.use(express.json({ extended: false }));
 
 app.use((req, res, next) => {
+	console.log(req);
 	console.log(req.headers);
 	const pw = req.get('auth-token');
+	console.log(pw);
 	if (pw !== PW) {
 		res.status(401).send('Unauthorized');
 		return;
