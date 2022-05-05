@@ -6,7 +6,7 @@ const multer = require('multer');
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 const PW = process.env.PW || 'password123';
 const app = express();
 
