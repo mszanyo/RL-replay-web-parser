@@ -21,7 +21,7 @@ app.use(express.json({ extended: false }));
 
 app.use((req, res, next) => {
 	console.log(req.headers);
-	const pw = req.get('Auth-Token');
+	const pw = req.get('auth-token');
 	if (pw !== PW) {
 		res.status(401).send('Unauthorized');
 		return;
