@@ -6,17 +6,14 @@ const multer = require('multer');
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
-const PORT = process.env.PORT || 3000;
-const PW = process.env.PW || 'password123';
+const PORT = process.env.PORT || 3001;
+const PW = 'password123';
 const app = express();
 
 app.use((req, res, next) => {
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
-	res.header(
-		'Access-Control-Allow-Headers',
-		'Origin, X-Requested-With, Content-Type, Accept, Authorization, Auth-Token, auth-token'
-	);
+	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
 	next();
 });
 
@@ -25,7 +22,7 @@ app.use(express.json({ extended: false }));
 app.use((req, res, next) => {
 	console.log(req);
 	console.log(req.headers);
-	const pw = req.get('auth-token');
+	const pw = req.get('Authorization');
 	console.log(pw);
 	if (pw !== PW) {
 		res.status(401).send('Unauthorized');
