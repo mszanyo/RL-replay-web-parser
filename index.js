@@ -6,7 +6,8 @@ const multer = require('multer');
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
+const PW = process.env.PW || 'password123';
 const app = express();
 
 app.use((req, res, next) => {
@@ -17,6 +18,17 @@ app.use((req, res, next) => {
 });
 
 app.use(express.json({ extended: false }));
+
+app.use((req, res, next) => {
+	console.log(req.headers);
+	const pw = req.headers.authorizationtoken;
+	if (pw !== PW) {
+		res.status(401).send('Unauthorized');
+		return;
+	}
+
+	next();
+});
 
 app.post('/parse-replay', upload.single('file'), async function (req, res, next) {
 	if (!req.file) return res.status(400).json('No file uploaded');
