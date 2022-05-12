@@ -13,26 +13,15 @@ const app = express();
 app.use((req, res, next) => {
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
-	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+	res.header('X-Secrete-Code','Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
 	next();
 });
 
 app.use(express.json({ extended: false }));
 
-// app.use((req, res, next) => {
-// 	console.log(req);
-// 	console.log(req.headers);
-// 	const pw = req.get('auth-token');
-// 	console.log(pw);
-// 	if (pw !== PW) {
-// 		res.status(401).send('Unauthorized');
-// 		return;
-// 	}
-
-// 	next();
-// });
-
 app.post('/parse-replay', upload.single('file'), async function (req, res, next) {
+	const pw = req.get('X-Secrete-Code');
+	if (pw !== PW) return res.status(401).json('Unauthorized');
 	if (!req.file) return res.status(400).json('No file uploaded');
 	if (req.file.mimetype !== 'application/octet-stream' || !req.file.buffer)
 		return res.status(415).json('File is not a replay');
